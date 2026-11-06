@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>《后会友期》友情合拍鉴定局 · FRIEND FREQUENCY LAB</title>
+<meta name="description" content="12 道题，找到你的友情频道。以《后会友期》八位旧友为原型的趣味自我探索小测试。">
+<style>
+:root{
+  --cream:#F5F2E7;
+  --paper:#FFFCF3;
+  --ink:#171C16;
+  --ink2:#3C433A;
+  --ink3:#818876;
+  --lime:#C9FF35;
+  --lime2:#ADEA12;
+  --line:rgba(23,28,22,.14);
+  --font:"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei","Noto Sans CJK SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  margin:0;padding:0;min-height:100vh;background:var(--cream);color:var(--ink);
+  font-family:var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  font-variant-numeric:tabular-nums;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background-image:linear-gradient(rgba(23,28,22,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(23,28,22,.045) 1px,transparent 1px);
+  background-size:34px 34px;
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.85),rgba(0,0,0,.28));
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.85),rgba(0,0,0,.28));
+}
+body::after{
+  content:"";position:fixed;width:680px;height:680px;right:-260px;top:-280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,255,53,.6),rgba(201,255,53,0) 68%);
+  z-index:-1;pointer-events:none;
+}
+::selection{background:var(--lime);color:var(--ink)}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px 72px}
+
+/* ---------- top bar ---------- */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 0 16px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.03em;font-size:15px;white-space:nowrap}
+.brand .mark{width:28px;height:28px;border-radius:9px;background:var(--lime);border:1px solid var(--ink);display:grid;place-items:center;font-size:15px;transform:rotate(-9deg);flex:none}
+.brand .en{font-size:10px;letter-spacing:.16em;color:var(--ink3);font-weight:700;margin-left:2px}
+.topbar .badge{font-size:11px;letter-spacing:.04em;color:var(--ink2);border:1px solid var(--line);border-radius:999px;padding:6px 11px;background:rgba(255,255,255,.55);white-space:nowrap}
+
+/* ---------- views ---------- */
+.view{display:none}
+.view.active{display:block;animation:rise .48s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ---------- home ---------- */
+.hero{padding:58px 0 8px;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.16em;background:var(--ink);color:var(--lime);padding:8px 14px;border-radius:999px}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--lime);display:block}
+.hero h1{font-size:clamp(42px,8.6vw,80px);line-height:1.24;letter-spacing:-.055em;font-weight:900;margin:22px 0 20px}
+.hero h1 .hl{background:var(--lime);padding:0 .1em;border-radius:5px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hero h1 .stroke{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.lead{font-size:15.5px;line-height:1.95;color:var(--ink2);max-width:590px;margin:0}
+.lead b{color:var(--ink);background:linear-gradient(transparent 62%,rgba(201,255,53,.75) 62%)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:36px 0 30px}
+.stat{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;width:44px;height:44px;right:-16px;top:-16px;border-radius:50%;background:var(--lime);opacity:.5}
+.stat b{display:block;font-size:clamp(24px,4.6vw,34px);font-weight:900;letter-spacing:-.05em;line-height:1}
+.stat span{display:block;font-size:11.5px;color:var(--ink3);margin-top:8px;letter-spacing:.03em}
+.cta-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.btn{
+  font-family:inherit;font-size:15px;font-weight:800;letter-spacing:.01em;cursor:pointer;
+  border-radius:13px;padding:16px 26px;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .18s,box-shadow .18s,background .18s;line-height:1.2;
+}
+.btn-primary{background:var(--lime);color:var(--ink);border:1.5px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}
+.btn-primary:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.btn-primary:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-dark{background:var(--ink);color:var(--cream);border:1.5px solid var(--ink);box-shadow:5px 5px 0 rgba(201,255,53,.9)}
+.btn-dark:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 rgba(201,255,53,.9)}
+.btn[disabled]{opacity:.4;cursor:not-allowed;box-shadow:none;transform:none}
+.btn .arr{font-size:18px;line-height:1}
+.hint{font-size:12px;color:var(--ink3);line-height:1.7}
+.section-title{display:flex;align-items:baseline;gap:12px;margin:52px 0 16px}
+.section-title h2{font-size:19px;font-weight:900;letter-spacing:-.03em;margin:0}
+.section-title span{font-size:10.5px;letter-spacing:.14em;color:var(--ink3);font-weight:700}
+.chip-wall{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:rgba(255,255,255,.6);border-radius:999px;padding:8px 13px;font-size:12.5px;color:var(--ink2);display:inline-flex;align-items:center;gap:7px}
+.chip i{width:6px;height:6px;border-radius:50%;background:var(--ink3);display:block}
+.chip:nth-child(3n+1) i{background:var(--lime2)}
+.note{margin-top:40px;border-top:1px dashed var(--line);padding-top:18px;font-size:11.5px;line-height:1.9;color:var(--ink3)}
+
+/* ---------- quiz ---------- */
+.quiz-head{padding:30px 0 22px}
+.quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.quiz-meta .step{font-size:12px;font-weight:800;letter-spacing:.1em}
+.quiz-meta .step b{font-size:20px;letter-spacing:-.04em}
+.quiz-meta .rate{font-size:11px;color:var(--ink3);letter-spacing:.06em}
+.progress-track{height:9px;border:1.5px solid var(--ink);border-radius:99px;background:var(--paper);overflow:hidden}
+.progress-fill{height:100%;width:8.33%;background:var(--lime);transition:width .42s cubic-bezier(.2,.8,.2,1)}
+.dots{display:flex;gap:5px;margin-top:10px}
+.dots i{flex:1;height:5px;background:var(--line);border-radius:3px;transition:background .3s}
+.dots i.done{background:var(--lime2)}
+.dots i.now{background:var(--ink)}
+.q-card{background:var(--paper);border:1.5px solid var(--ink);border-radius:22px;padding:30px;box-shadow:7px 7px 0 rgba(23,28,22,.11);position:relative;overflow:hidden}
+.q-card::before{content:"Q";position:absolute;right:-12px;top:-42px;font-size:150px;font-weight:900;color:rgba(23,28,22,.035);line-height:1;pointer-events:none}
+.q-num{font-size:58px;font-weight:900;line-height:1;color:transparent;-webkit-text-stroke:1.6px var(--ink);letter-spacing:-.06em}
+.q-tag{display:inline-block;margin:14px 0 12px;font-size:10.5px;font-weight:800;letter-spacing:.14em;color:var(--ink3);border-bottom:1px solid var(--line);padding-bottom:7px}
+.q-text{font-size:clamp(19px,3.4vw,25px);font-weight:800;line-height:1.55;letter-spacing:-.025em;margin:0 0 4px;position:relative}
+.q-sub{font-size:12.5px;color:var(--ink3);margin:8px 0 0;line-height:1.7}
+.opts{display:grid;gap:11px;margin-top:26px}
+.opt{display:flex;align-items:flex-start;gap:13px;width:100%;text-align:left;padding:16px 17px;border:1.5px solid var(--line);border-radius:14px;background:#fff;font-family:inherit;font-size:14.5px;line-height:1.65;color:var(--ink);cursor:pointer;transition:transform .16s,border-color .16s,background .16s,box-shadow .16s}
+.opt:hover{border-color:var(--ink);transform:translateX(3px)}
+.opt .key{width:26px;height:26px;flex:none;border-radius:8px;border:1px solid var(--line);display:grid;place-items:center;font-size:11.5px;font-weight:900;background:var(--cream)}
+.opt.selected{border-color:var(--ink);background:var(--lime);box-shadow:3px 3px 0 var(--ink);transform:translateX(2px)}
+.opt.selected .key{background:var(--ink);color:var(--lime);border-color:var(--ink)}
+.quiz-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px;flex-wrap:wrap}
+.quiz-foot .btn{padding:13px 22px;font-size:14px}
+.mini-link{background:none;border:none;font-family:inherit;font-size:12.5px;color:var(--ink3);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px}
+
+/* ---------- result ---------- */
+.result-head{padding:32px 0 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.result-head .kicker{font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--ink3)}
+.result-head h2{font-size:clamp(26px,5.4vw,40px);font-weight:900;letter-spacing:-.045em;margin:8px 0 0}
+.stamp{width:66px;height:66px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;transform:rotate(-14deg);font-size:11px;font-weight:900;line-height:1.35;text-align:center;letter-spacing:.06em;background:var(--lime);flex:none}
+.hero-result{background:var(--ink);color:var(--cream);border-radius:22px;padding:30px;position:relative;overflow:hidden;box-shadow:7px 7px 0 rgba(201,255,53,.85)}
+.hero-result::after{content:"";position:absolute;width:240px;height:240px;right:-90px;bottom:-130px;border-radius:50%;border:1px solid rgba(201,255,53,.28);box-shadow:0 0 0 26px rgba(201,255,53,.05),0 0 0 52px rgba(201,255,53,.035);pointer-events:none}
+.hr-kicker{font-size:10.5px;letter-spacing:.18em;color:var(--lime);font-weight:800}
+.hr-main{font-size:clamp(32px,7.4vw,58px);font-weight:900;letter-spacing:-.055em;line-height:1.12;color:var(--lime);margin:14px 0 8px}
+.hr-code{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--cream);background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 15px;margin-top:6px}
+.hr-slogan{font-size:14px;color:rgba(255,252,243,.72);line-height:1.8;margin:20px 0 0;position:relative;z-index:1}
+.hr-sub{font-size:11.5px;color:rgba(255,252,243,.68);margin:10px 0 0;position:relative;z-index:1}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.pair .card{border-radius:18px;padding:20px;border:1.5px solid var(--ink);background:var(--paper);position:relative;overflow:hidden}
+.pair .card.match{background:var(--lime)}
+.pair .card.miss{background:var(--paper)}
+.pair .lbl{font-size:10.5px;font-weight:800;letter-spacing:.12em;color:var(--ink3)}
+.pair .card.match .lbl{color:var(--ink2)}
+.pair .who{display:flex;align-items:center;gap:12px;margin-top:14px}
+.avatar{width:46px;height:46px;border-radius:14px;background:var(--ink);color:var(--lime);display:grid;place-items:center;font-size:19px;font-weight:900;flex:none;border:1.5px solid var(--ink)}
+.pair .card.match .avatar{background:var(--ink);color:var(--lime)}
+.who .nm{font-size:20px;font-weight:900;letter-spacing:-.03em;line-height:1.2}
+.who .ch{font-size:11.5px;color:var(--ink3);margin-top:4px}
+.pair .card.match .who .ch{color:var(--ink2)}
+.pair .desc{font-size:12.5px;line-height:1.75;color:var(--ink2);margin:14px 0 0}
+.block{margin-top:14px;background:var(--paper);border:1.5px solid var(--ink);border-radius:18px;padding:24px}
+.block h3{font-size:16px;font-weight:900;letter-spacing:-.02em;margin:0 0 4px;display:flex;align-items:center;gap:9px}
+.block h3::before{content:"";width:9px;height:9px;border-radius:3px;background:var(--lime2);border:1px solid var(--ink);display:block}
+.block .cap{font-size:11px;color:var(--ink3);letter-spacing:.08em;margin:0 0 18px}
+.portrait p{font-size:14.5px;line-height:2;color:var(--ink2);margin:0 0 12px}
+.portrait p:last-child{margin-bottom:0}
+.portrait .clash{background:rgba(23,28,22,.045);border-left:3px solid var(--lime2);padding:12px 15px;border-radius:0 10px 10px 0;font-size:13.5px}
+/* vertical bar chart */
+.chart{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;align-items:end;height:214px;padding:0 2px}
+.col{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:5px;min-width:0}
+.col .val{font-size:10.5px;font-weight:900;color:var(--ink3);letter-spacing:-.02em}
+.col.top .val{color:var(--ink);font-size:12px}
+.col .vb{width:100%;max-width:44px;height:0;border:1.5px solid var(--ink);border-bottom:none;border-radius:7px 7px 0 0;background:rgba(23,28,22,.78);transition:height 1s cubic-bezier(.2,.8,.2,1)}
+.col.top .vb{background:var(--lime);box-shadow:inset 0 0 0 3px rgba(23,28,22,.06)}
+.chart-names{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;margin-top:10px;padding:0 2px;border-top:1px solid var(--line);padding-top:10px}
+.chart-names span{writing-mode:vertical-rl;letter-spacing:.08em;font-size:11px;color:var(--ink2);margin:0 auto;height:48px;white-space:nowrap}
+.chart-names span.top{color:var(--ink);font-weight:900}
+.chart-axis{display:flex;justify-content:space-between;font-size:10px;color:var(--ink3);margin-top:6px;letter-spacing:.06em}
+/* ranking list */
+.rank-list{margin-top:22px;border-top:1px dashed var(--line);padding-top:8px}
+.rank-row{display:grid;grid-template-columns:26px 1fr 44px;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(23,28,22,.07)}
+.rank-row:last-child{border-bottom:none}
+.rk{font-size:13px;font-weight:900;color:var(--ink3);letter-spacing:-.02em}
+.rank-row.top .rk{color:var(--ink)}
+.rank-row .info{min-width:0}
+.rank-row .line1{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:800;flex-wrap:wrap}
+.rank-row .line1 em{font-style:normal;font-size:10px;font-weight:700;color:var(--ink3);background:rgba(23,28,22,.055);padding:3px 8px;border-radius:999px;white-space:nowrap}
+.rank-row .track{height:7px;border-radius:99px;background:rgba(23,28,22,.075);overflow:hidden;margin-top:8px}
+.rank-row .fill{height:100%;width:0;border-radius:99px;background:rgba(23,28,22,.62);transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.rank-row.top .fill{background:var(--lime2);border:1px solid rgba(23,28,22,.25)}
+.rank-row .pct{font-size:14px;font-weight:900;text-align:right;letter-spacing:-.03em}
+.rank-row.top .pct{font-size:16px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.actions .btn{flex:1;min-width:150px}
+.foot-note{margin-top:24px;font-size:11px;line-height:1.9;color:var(--ink3);border-top:1px dashed var(--line);padding-top:16px}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(23,28,22,.72);backdrop-filter:blur(6px)}
+.modal.open{display:flex;animation:fade .25s both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.modal-box{background:var(--cream);border:1.5px solid var(--ink);border-radius:20px;padding:20px;width:min(420px,100%);max-height:92vh;overflow:auto;text-align:center;box-shadow:10px 10px 0 var(--lime)}
+.modal-box h3{font-size:18px;font-weight:900;margin:0 0 4px;letter-spacing:-.03em}
+.modal-box .tip{font-size:11.5px;color:var(--ink3);margin:0 0 14px;line-height:1.7}
+#shareImg{display:block;width:100%;max-height:58vh;object-fit:contain;border:1px solid var(--line);border-radius:12px;background:#fff}
+.modal-actions{display:flex;gap:10px;margin-top:16px}
+.modal-actions .btn{flex:1;padding:13px 14px;font-size:13.5px}
+.spinner{width:100%;height:280px;display:grid;place-items:center;font-size:13px;color:var(--ink3);border:1px dashed var(--line);border-radius:12px}
+
+/* ---------- footer ---------- */
+.footer{border-top:1px solid var(--line);padding:18px 0 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:10.5px;color:var(--ink3);letter-spacing:.04em;margin-top:40px}
+
+@media (max-width:620px){
+  .wrap{padding:0 18px 56px}
+  .hero{padding-top:42px}
+  .hero h1{letter-spacing:-.05em}
+  .stats{gap:8px;margin:28px 0 24px}
+  .stat{padding:14px 12px}
+  .stat b{font-size:25px}
+  .stat span{font-size:10.5px;line-height:1.5}
+  .cta-row .btn-primary{width:100%}
+  .q-card{padding:22px 18px;border-radius:18px}
+  .q-num{font-size:46px}
+  .opt{padding:14px 13px;font-size:14px;gap:10px}
+  .pair{grid-template-columns:1fr}
+  .block{padding:20px 16px}
+  .chart{height:180px;gap:4px}
+  .chart-names{gap:4px}
+  .chart-names span{font-size:10px;height:44px}
+  .col .vb{max-width:34px}
+  .col .val{font-size:9.5px}
+  .hero-result{padding:24px 20px}
+  .rank-row{grid-template-columns:22px 1fr 40px;gap:9px}
+  .rank-row .line1{font-size:12.5px}
+  .rank-row .line1 em{font-size:9.5px}
+  .actions .btn{min-width:100%;flex:1 1 100%}
+  .topbar .badge{display:none}
+  .footer{margin-top:28px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand"><span class="mark">友</span><span>后会友期<span class="en">/ FRIEND FREQUENCY LAB</span></span></div>
+    <div class="badge">友情合拍鉴定局 · 第 001 号实验室</div>
+  </header>
+
+  <main>
+    <!-- ============ HOME ============ -->
+    <section id="viewHome" class="view active">
+      <div class="hero">
+        <div class="eyebrow"><i></i>12 道情境题 · 8 个友情频道</div>
+        <h1>你的友情<br><span class="hl">信号</span>，<br><span class="stroke">对上</span>谁了？</h1>
+        <p class="lead">有些朋友一见面就自动连上，有些怎么调都有杂音。<br>这本鉴定局以《后会友期》<b>八位旧友的相处方式</b>为原型，用 12 道小题校准你的友情频率，看看你最像哪个频道、和谁最容易同频。</p>
+        <div class="stats">
+          <div class="stat"><b>12</b><span>道情境选择题</span></div>
+          <div class="stat"><b>08</b><span>个友情频道</span></div>
+          <div class="stat"><b>3′</b><span>约三分钟出报告</span></div>
+        </div>
+        <div class="cta-row">
+          <button class="btn btn-primary" id="btnStart">开始鉴定 <span class="arr">→</span></button>
+          <div class="hint">不用想太久，选第一反应就好<br>可随时返回修改答案</div>
+        </div>
+      </div>
+
+      <div class="section-title"><h2>本次可校准的 8 个频道</h2><span>CHANNEL LIST</span></div>
+      <div class="chip-wall" id="chipWall"></div>
+
+      <p class="note">※ 这是一份趣味自我探索小游戏。题目与结果均以节目中呈现的友情相处方式为灵感做趣味化演绎，不构成对嘉宾本人的评价，也不是心理测评或人格诊断。放松答，答案没有对错。</p>
+    </section>
+
+    <!-- ============ QUIZ ============ -->
+    <section id="viewQuiz" class="view">
+      <div class="quiz-head">
+        <div class="quiz-meta">
+          <div class="step">第 <b id="qNow">1</b> / 12 题</div>
+          <div class="rate" id="qRate">进度 0%</div>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="dots" id="dots"></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-num" id="qNum">01</div>
+        <div class="q-tag" id="qTag">SCENE 01</div>
+        <h2 class="q-text" id="qText"></h2>
+        <p class="q-sub">选一个最像你会有的反应，别替「理想中的自己」作答。</p>
+        <div class="opts" id="opts"></div>
+      </div>
+
+      <div class="quiz-foot">
+        <button class="btn btn-ghost" id="btnPrev">← 上一题</button>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <button class="mini-link" id="btnHome">放弃并返回首页</button>
+          <button class="btn btn-primary" id="btnNext" disabled>下一题 <span class="arr">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RESULT ============ -->
+    <section id="viewResult" class="view">
+      <div class="result-head">
+        <div><div class="kicker">FRIEND FREQUENCY REPORT / 鉴定报告</div><h2>你的友情频道，出结果了</h2></div>
+        <div class="stamp">合拍<br>鉴定<br>完毕</div>
+      </div>
+
+      <div class="hero-result">
+        <div class="hr-kicker">YOUR FRIENDSHIP CHANNEL · 友情频道偏向</div>
+        <div class="hr-main" id="rMain"></div>
+        <div class="hr-code" id="rCode"></div>
+        <p class="hr-slogan" id="rSlogan"></p>
+        <p class="hr-sub" id="rSub"></p>
+      </div>
+
+      <div class="pair">
+        <div class="card match">
+          <div class="lbl">◎ 最同频 · TOP MATCH</div>
+          <div class="who"><div class="avatar" id="rMatchAva"></div><div><div class="nm" id="rMatchName"></div><div class="ch" id="rMatchCh"></div></div></div>
+          <p class="desc" id="rMatchDesc"></p>
+        </div>
+        <div class="card miss">
+          <div class="lbl">△ 最难对上 · SIGNAL GAP</div>
+          <div class="who"><div class="avatar" id="rMissAva" style="background:transparent;color:var(--ink);border-color:var(--ink)"></div><div><div class="nm" id="rMissName"></div><div class="ch" id="rMissCh"></div></div></div>
+          <p class="desc" id="rMissDesc"></p>
+        </div>
+      </div>
+
+      <div class="block portrait">
+        <h3>你的友情画像</h3>
+        <p class="cap">PORTRAIT / 由 12 道题的得分组合生成</p>
+        <div id="rPortrait"></div>
+      </div>
+
+      <div class="block">
+        <h3>八位嘉宾 · 友情同频度</h3>
+        <p class="cap">FREQUENCY CHART / 数值为本次答题的相对同频指数</p>
+        <div class="chart" id="chart"></div>
+        <div class="chart-names" id="chartNames"></div>
+        <div class="chart-axis"><span>低频</span><span>同频度指数 · 满分 100</span><span>高频</span></div>
+        <div class="rank-list" id="rankList"></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-dark" id="btnShare">↓ 保存分享卡</button>
+        <button class="btn btn-primary" id="btnRetry">↻ 重新测试</button>
+      </div>
+      <p class="foot-note" id="rFoot"></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>后会友期 · 友情合拍鉴定局 / FRIEND FREQUENCY LAB</span>
+    <span>趣味自我探索 · 非心理测评 · 结果仅供一乐</span>
+  </footer>
+</div>
+
+<!-- ============ SHARE MODAL ============ -->
+<div class="modal" id="shareModal">
+  <div class="modal-box">
+    <h3>你的鉴定卡已生成</h3>
+    <p class="tip">手机长按图片即可保存到相册 · 电脑可点下方下载</p>
+    <div class="spinner" id="shareLoading">正在绘制卡片…</div>
+    <img id="shareImg" alt="友情合拍鉴定卡" style="display:none">
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="btnDownload">下载图片</button>
+      <button class="btn btn-ghost" id="btnClose">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ===== 8 个友情频道：以《后会友期》四对旧友为原型的趣味化演绎 ===== */
+const CHANNELS = [
+  {
+    name:"张萌", role:"演员 / 制片人 · 旧友", channel:"局气兜底频道", label:"局气兜底型",
+    code:"人形安全网", slogan:"别慌，我在。",
+    profile:"你是那种「有事真上」的朋友。别人还在问怎么办，你已经把人联系好了、把位置订好了、把退路留好了。你不常说漂亮话，但你的靠谱是能当场兑现的那一款。",
+    asSub:"还带一点「局气兜底」：真到关键时刻，你会先伸手把事扛起来。",
+    asClash:"和「局气兜底频道」最容易错位：你更想自己把事消化完，不太习惯被安排。"
+  },
+  {
+    name:"马天宇", role:"演员 / 歌手 · 旧友", channel:"体面留白频道", label:"体面留白型",
+    code:"温柔缓冲垫", slogan:"不追问，也是在乎。",
+    profile:"你把分寸感看得比亲密更重。不追问、不越界、不逼人表态，你相信好的友情应该留一点呼吸的空隙。和你相处很省力，因为你知道什么时候该安静。",
+    asSub:"还带一点「体面留白」：你懂得给对方留一口气，不追问到底。",
+    asClash:"和「体面留白频道」最容易错位：你偏好把话摊开说，太多留白会让你没底。"
+  },
+  {
+    name:"厉娜", role:"歌手 · 旧友", channel:"念旧深水频道", label:"念旧深水型",
+    code:"记忆保管员", slogan:"我记得，就都还在。",
+    profile:"你的友情是一条慢河。表面不热烈，底下却存着所有细节：某年某月的一句玩笑、一张旧合照、对方随口提过的忌口。嘴上淡淡的，心里一直没放下。",
+    asSub:"还带一点「念旧深水」：那些连本人都忘了的小事，你替他记着。",
+    asClash:"和「念旧深水频道」最容易错位：你更愿意往前看，不太反复摩挲旧账。"
+  },
+  {
+    name:"许飞", role:"音乐人 · 旧友", channel:"创作共鸣频道", label:"创作共鸣型",
+    code:"情绪翻译机", slogan:"说不出口的，我写成歌。",
+    profile:"你不太擅长直给，但很会把心意换个形状送出去——一首歌、一段长消息、一个只有两个人懂的暗号。你的友情有配乐，也有注释。",
+    asSub:"还带一点「创作共鸣」：你习惯把说不出口的，变成一首歌或一段话。",
+    asClash:"和「创作共鸣频道」最容易错位：你的心意更直接，不总需要一层仪式感。"
+  },
+  {
+    name:"文吉儿", role:"作家 · 旧友", channel:"清醒边界频道", label:"清醒边界型",
+    code:"边界测绘师", slogan:"先把话说清楚。",
+    profile:"你先把话说清楚，再把心交出去。哪些是帮忙、哪些是越界，哪些可以商量、哪些不必勉强，你心里有一张清楚的地图。这份清醒，反而让关系更耐久。",
+    asSub:"还带一点「清醒边界」：你很清楚哪条线不能越，也愿意先讲明白。",
+    asClash:"和「清醒边界频道」最容易错位：你凭感觉走，边界画得太清会有点凉。"
+  },
+  {
+    name:"王子璇", role:"演员 · 旧友", channel:"直球爽快频道", label:"直球爽快型",
+    code:"人间直球机", slogan:"有话直说，说完翻篇。",
+    profile:"有意见当场提，有误会当场拆，你不攒账也不内耗。你的友情没有隐藏关卡，跟你在一起什么都变得简单：说开，然后翻篇。",
+    asSub:"还带一点「直球爽快」：该说的话你不当面绕，说完就翻篇。",
+    asClash:"和「直球爽快频道」最容易错位：你需要一点铺垫，太直的球容易接不稳。"
+  },
+  {
+    name:"青稚", role:"电竞选手 · 旧友", channel:"战术同盟频道", label:"战术同盟型",
+    code:"最佳作战搭子", slogan:"一起把这局打赢。",
+    profile:"比起一起发呆，你更喜欢一起把事做成。目标、分工、下一步，这些词在你这里一点都不冷，反而是你表达在乎的方式：我愿意和你并肩打这一局。",
+    asSub:"还带一点「战术同盟」：比起闲着，你更爱和人一起把事做成。",
+    asClash:"和「战术同盟频道」最容易错位：你更看重在一起的状态，不太想被目标推着跑。"
+  },
+  {
+    name:"白小纯", role:"电竞选手 · 旧友", channel:"并肩默契频道", label:"并肩默契型",
+    code:"长期在线星人", slogan:"不用约，也一直在。",
+    profile:"你最擅长的不是轰轰烈烈，而是不断线。老位置、老菜单、没头没尾的废话，一天一句也够。你的友情像背景音，平时不察觉，一停就发现少了点什么。",
+    asSub:"还带一点「并肩默契」：不用刻意维护，日常都在就是你的安全感。",
+    asClash:"和「并肩默契频道」最容易错位：你需要新鲜感和变化，日日在线反而容易闷。"
+  }
+];
+
+/* ===== 12 题：每题 4 个选项，c 为对应的频道索引 =====
+   8 个频道各作为主频道出现 6 次，机会均等；
+   次频道取本题选项中的下一个，让画像更立体。            */
+const QUESTIONS = [
+  { q:"深夜十一点，很久没联系的老朋友突然发来一句「在吗？」", opts:[
+    {t:"直接拨语音过去：别打字了，我今晚有空，慢慢说", c:0},
+    {t:"回一句「我在」，然后安静等他想说多少", c:1},
+    {t:"翻出我们几年前的聊天记录，先猜他怎么了", c:2},
+    {t:"给他发一首刚好对味的歌，什么也不多问", c:3}
+  ]},
+  { q:"约好一起旅行，出发前一天对方说「要不改改行程？」", opts:[
+    {t:"先确认改到什么程度、费用怎么算，再谈感受", c:4},
+    {t:"直接问：你是不是不太想去了？我们说开", c:5},
+    {t:"把两个方案列成表，挑一个效率最高的", c:6},
+    {t:"你定，我跟着走，反正重点是跟你一起", c:7}
+  ]},
+  { q:"聚会上，朋友开了句让你有点不舒服的玩笑。", opts:[
+    {t:"当场轻轻圆过去，先把场子护住，事后私下聊", c:0},
+    {t:"平静告诉他：这句我不太舒服，下次别这样", c:4},
+    {t:"笑一下带过，记在心里，不给他难堪", c:1},
+    {t:"立刻回一句「这梗有点过啊」，说完就翻篇", c:5}
+  ]},
+  { q:"有一段友情，不知不觉就慢慢淡了。你通常会…", opts:[
+    {t:"默默存着所有旧照片，不主动也不删", c:2},
+    {t:"找个共同目标再约一次，比如一起报个比赛", c:6},
+    {t:"写点什么，把那段日子好好收进一个地方", c:3},
+    {t:"保持每周一句废话的频率，不断线就够了", c:7}
+  ]},
+  { q:"朋友遇上麻烦，第一通电话打给了你。", opts:[
+    {t:"别说了，人我已经帮你联系好了", c:0},
+    {t:"先陪他坐一会儿，想起上次他也这样陪过我", c:2},
+    {t:"先问清：你需要我出主意，还是只想有人听", c:4},
+    {t:"拆成三步，我们今天先解决第一步", c:6}
+  ]},
+  { q:"如果周末完全由你安排，最理想的打开方式是？", opts:[
+    {t:"各自看书一下午，临走前一起吃碗面", c:1},
+    {t:"一起瞎写瞎弹，弄出点没什么用的东西", c:3},
+    {t:"临时起意，说走就走，目的地路上再定", c:5},
+    {t:"照旧老位置、老菜单，不用安排也舒服", c:7}
+  ]},
+  { q:"朋友做了个你不太认同的决定，你会怎么说？", opts:[
+    {t:"把担心写成一段话发给他，比当面说更完整", c:3},
+    {t:"说清我的理由，然后明确：决定权在你", c:4},
+    {t:"一句「我觉得不靠谱」，然后该支持还是支持", c:5},
+    {t:"不问对错，先把可能踩的坑替他垫好", c:0}
+  ]},
+  { q:"打开你和最要好那位朋友的聊天框，画风更像…", opts:[
+    {t:"截图、链接、待办清单，信息密度很高", c:6},
+    {t:"一堆没头没尾的废话，但一天都没断过", c:7},
+    {t:"几天不说话，一开口还是接得上", c:1},
+    {t:"突然甩出一张多年前的旧合照", c:2}
+  ]},
+  { q:"给自己的友情写一份「使用说明」，第一条是？", opts:[
+    {t:"有意见当面提，禁止背后攒账", c:5},
+    {t:"我可以很久不联系，但你别把我忘了", c:2},
+    {t:"不用特别维护，日常在就行", c:7},
+    {t:"出事找我，别自己扛", c:0}
+  ]},
+  { q:"发出去的消息，三天没等到回复。你的第一反应？", opts:[
+    {t:"大概率是忙，不追问，等他方便", c:1},
+    {t:"换个渠道把事推进，不卡在等回复上", c:6},
+    {t:"确认一次，没回就默认这事先放着", c:4},
+    {t:"顺手把想说的写成一条长消息存着", c:3}
+  ]},
+  { q:"友情里，你最不能少的是哪一样？", opts:[
+    {t:"记得住那些连我自己都忘了的小事", c:2},
+    {t:"不用猜，说什么都不用绕弯", c:5},
+    {t:"有一套只属于我们的暗号和歌单", c:3},
+    {t:"彼此都清楚哪里是不能越的线", c:4}
+  ]},
+  { q:"走散多年后重逢，你脱口而出的第一句是…", opts:[
+    {t:"「还是老样子啊」，然后自然接上话", c:7},
+    {t:"「吃饭没？我订好了」，先安排上", c:0},
+    {t:"「接下来打算干嘛」，聊点往前看的事", c:6},
+    {t:"笑一下说「好久不见」，不急着翻旧账", c:1}
+  ]}
+];
+
+const KEYS = ["A","B","C","D"];
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+
+let answers = new Array(QUESTIONS.length).fill(null);
+let current = 0;
+let autoTimer = null;
+let lastResult = null;
+let shareDataUrl = "";
+
+/* ===== 计分模型 =====
+   每个选项：主频道 +3，本题下一个选项的频道 +1（次频道）
+   8 个频道各自理论满分相同 → 用 min~max 线性映射成 38~96 的相对同频指数，
+   严格保留原始得分排序，榜单差异更可读。                          */
+function computeResult(ans){
+  const raw = new Array(CHANNELS.length).fill(0);
+  ans.forEach((pick, qi) => {
+    if (pick === null || pick === undefined) return;
+    const opts = QUESTIONS[qi].opts;
+    raw[opts[pick].c] += 3;
+    raw[opts[(pick + 1) % opts.length].c] += 1;
+  });
+  const max = Math.max.apply(null, raw);
+  const min = Math.min.apply(null, raw);
+  const ranked = CHANNELS.map((ch, i) => ({
+    ...ch, idx:i, raw:raw[i],
+    pct: max === min ? 67 : Math.round(38 + (raw[i] - min) / (max - min) * 58)
+  })).sort((a, b) => b.raw - a.raw || a.idx - b.idx);
+  return { ranked, top:ranked[0], second:ranked[1], low:ranked[ranked.length - 1] };
+}
+
+/* ===== 视图切换 ===== */
+function showView(id){
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  $(id).classList.add("active");
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* ===== 首页 ===== */
+function renderChips(){
+  $("chipWall").innerHTML = CHANNELS.map(c =>
+    '<span class="chip"><i></i>' + esc(c.name) + ' · ' + esc(c.channel) + '</span>'
+  ).join("");
+}
+
+/* ===== 答题页 ===== */
+function renderQuestion(){
+  const q = QUESTIONS[current];
+  $("qNow").textContent = current + 1;
+  $("qNum").textContent = String(current + 1).padStart(2, "0");
+  $("qTag").textContent = "SCENE " + String(current + 1).padStart(2, "0") + " / 12";
+  $("qText").textContent = q.q;
+  $("qRate").textContent = "进度 " + Math.round((current + 1) / QUESTIONS.length * 100) + "%";
+  $("progressFill").style.width = ((current + 1) / QUESTIONS.length * 100) + "%";
+  $("dots").innerHTML = QUESTIONS.map((_, i) =>
+    '<i class="' + (i < current ? "done" : (i === current ? "now" : "")) + '"></i>'
+  ).join("");
+  $("opts").innerHTML = q.opts.map((o, i) =>
+    '<button class="opt' + (answers[current] === i ? " selected" : "") + '" data-i="' + i + '">' +
+      '<span class="key">' + KEYS[i] + '</span><span>' + esc(o.t) + '</span></button>'
+  ).join("");
+  $("opts").querySelectorAll(".opt").forEach(btn => {
+    btn.addEventListener("click", () => selectOption(Number(btn.dataset.i)));
+  });
+  $("btnPrev").disabled = current === 0;
+  $("btnNext").disabled = answers[current] === null;
+  $("btnNext").innerHTML = current === QUESTIONS.length - 1
+    ? '生成鉴定报告 <span class="arr">→</span>'
+    : '下一题 <span class="arr">→</span>';
+}
+
+function selectOption(i){
+  answers[current] = i;
+  renderQuestion();
+  clearTimeout(autoTimer);
+  autoTimer = setTimeout(advance, current === QUESTIONS.length - 1 ? 780 : 480);
+}
+
+function advance(){
+  clearTimeout(autoTimer);
+  if (answers[current] === null) return;
+  if (current < QUESTIONS.length - 1){ current++; renderQuestion(); }
+  else showResult();
+}
+
+function goTo(i){
+  clearTimeout(autoTimer);
+  current = Math.max(0, Math.min(QUESTIONS.length - 1, i));
+  renderQuestion();
+}
+
+/* ===== 结果页 ===== */
+function showResult(){
+  if (answers.some(a => a === null)) return;
+  const r = computeResult(answers);
+  lastResult = r;
+  const T = r.top, S = r.second, L = r.low;
+
+  $("rMain").textContent = T.label;
+  $("rCode").textContent = "鉴定代号 · " + T.code;
+  $("rSlogan").textContent = "「" + T.slogan + "」";
+  $("rSub").textContent = T.channel.replace("频道", "") + " 主频 / " + S.channel.replace("频道", "") + " 副频 · 同频 " + T.pct;
+
+  $("rMatchAva").textContent = T.name.charAt(0);
+  $("rMatchName").textContent = T.name;
+  $("rMatchCh").textContent = T.channel + " · " + T.role;
+  $("rMatchDesc").textContent = "你们的信号最合拍，同频指数 " + T.pct + "。相处方式、表达节奏都很接近，大概不用多解释就能接住对方。";
+
+  $("rMissAva").textContent = L.name.charAt(0);
+  $("rMissName").textContent = L.name;
+  $("rMissCh").textContent = L.channel + " · " + L.role;
+  $("rMissDesc").textContent = "同频指数 " + L.pct + "。不是谁不好，只是频道隔得远了点，需要多调一会儿频。";
+
+  $("rPortrait").innerHTML =
+    "<p>" + esc(T.profile) + "</p>" +
+    "<p>" + esc(S.asSub) + "</p>" +
+    '<p class="clash">' + esc(L.asClash) + "</p>";
+
+  $("chart").innerHTML = r.ranked.map((x, i) =>
+    '<div class="col' + (i === 0 ? " top" : "") + '"><span class="val">' + x.pct + '</span>' +
+    '<div class="vb" data-h="' + x.pct + '"></div></div>'
+  ).join("");
+  $("chartNames").innerHTML = r.ranked.map((x, i) =>
+    '<span class="' + (i === 0 ? "top" : "") + '">' + esc(x.name) + "</span>"
+  ).join("");
+  $("rankList").innerHTML = r.ranked.map((x, i) =>
+    '<div class="rank-row' + (i === 0 ? " top" : "") + '">' +
+      '<span class="rk">' + String(i + 1).padStart(2, "0") + "</span>" +
+      '<div class="info"><div class="line1">' + esc(x.name) +
+        "<em>" + esc(x.channel) + "</em></div>" +
+        '<div class="track"><div class="fill" data-w="' + x.pct + '"></div></div></div>' +
+      '<span class="pct">' + x.pct + "</span></div>"
+  ).join("");
+  $("rFoot").textContent = "※ 同频指数由本次 12 道题的得分（主频道 +3 / 次频道 +1）换算为相对值，仅用于呈现本次答题的频道倾向。结果属于趣味自我探索，不构成心理测评，也与嘉宾本人无关。";
+
+  showView("viewResult");
+  setTimeout(() => {
+    document.querySelectorAll("#chart .vb").forEach((el, i) => {
+      el.style.height = (14 + Number(el.dataset.h) * 0.72) + "%";
+      el.style.transitionDelay = (i * 55) + "ms";
+    });
+    document.querySelectorAll("#rankList .fill").forEach((el, i) => {
+      el.style.width = el.dataset.w + "%";
+      el.style.transitionDelay = (i * 45) + "ms";
+    });
+  }, 120);
+}
+
+/* ===== 分享卡（Canvas 原生绘制，无外部依赖） ===== */
+function wrapText(ctx, text, x, y, maxW, lh, maxLines){
+  let line = "", lines = [];
+  for (const ch of String(text)){
+    if (ctx.measureText(line + ch).width > maxW && line){
+      lines.push(line); line = ch;
+      if (maxLines && lines.length >= maxLines) break;
+    } else line += ch;
+  }
+  if ((!maxLines || lines.length < maxLines) && line) lines.push(line);
+  lines.forEach((l, i) => ctx.fillText(l, x, y + i * lh));
+  return lines.length;
+}
+function roundRect(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+function buildShareCard(r){
+  const W = 750, H = 1240, S = 2;
+  const cv = document.createElement("canvas");
+  cv.width = W * S; cv.height = H * S;
+  const c = cv.getContext("2d");
+  c.scale(S, S);
+  const F = '"PingFang SC","Microsoft YaHei",sans-serif';
+  const INK = "#171C16", LIME = "#C9FF35", CREAM = "#F5F2E7", PAPER = "#FFFCF3";
+
+  c.fillStyle = CREAM; c.fillRect(0, 0, W, H);
+  // 网格纹理
+  c.strokeStyle = "rgba(23,28,22,.05)"; c.lineWidth = 1;
+  for (let x = 0; x <= W; x += 34){ c.beginPath(); c.moveTo(x, 0); c.lineTo(x, H); c.stroke(); }
+  for (let y = 0; y <= H; y += 34){ c.beginPath(); c.moveTo(0, y); c.lineTo(W, y); c.stroke(); }
+  // 右上荧光绿光晕
+  const g = c.createRadialGradient(690, -60, 10, 690, -60, 380);
+  g.addColorStop(0, "rgba(201,255,53,.95)"); g.addColorStop(1, "rgba(201,255,53,0)");
+  c.fillStyle = g; c.fillRect(300, 0, 450, 400);
+  // 外框
+  c.strokeStyle = "rgba(23,28,22,.22)"; c.lineWidth = 2;
+  roundRect(c, 22, 22, W - 44, H - 44, 22); c.stroke();
+
+  // 顶部标识
+  c.fillStyle = INK; roundRect(c, 52, 54, 46, 46, 12); c.fill();
+  c.fillStyle = LIME; c.font = "900 26px " + F; c.textAlign = "center";
+  c.fillText("友", 75, 87);
+  c.textAlign = "left";
+  c.fillStyle = INK; c.font = "900 25px " + F; c.fillText("后会友期 · 友情合拍鉴定局", 112, 85);
+  c.fillStyle = "#818876"; c.font = "700 14px " + F; c.fillText("FRIEND FREQUENCY LAB  /  REPORT 001", 54, 130);
+  c.strokeStyle = "rgba(23,28,22,.18)"; c.beginPath(); c.moveTo(54, 152); c.lineTo(W - 54, 152); c.stroke();
+
+  // 主标签（墨色大卡）
+  c.fillStyle = INK; roundRect(c, 52, 180, W - 104, 268, 24); c.fill();
+  c.fillStyle = LIME; c.font = "800 15px " + F; c.fillText("YOUR FRIENDSHIP CHANNEL  ·  友情频道偏向", 82, 220);
+  c.font = "900 66px " + F; c.fillText(r.top.label, 80, 300);
+  c.fillStyle = "rgba(255,252,243,.9)"; c.font = "700 21px " + F;
+  c.fillText("鉴定代号 · " + r.top.code, 82, 344);
+  c.fillStyle = "rgba(255,252,243,.62)"; c.font = "400 19px " + F;
+  c.fillText("「" + r.top.slogan + "」", 82, 382);
+  c.fillStyle = LIME; roundRect(c, 82, 404, 190, 32, 16); c.fill();
+  c.fillStyle = INK; c.font = "900 15px " + F; c.fillText("同频指数 " + r.top.pct, 100, 426);
+
+  // 最同频 / 最难对上
+  const cardY = 470, cardH = 152, cardW = (W - 104 - 16) / 2;
+  // 左：荧光绿
+  c.fillStyle = LIME; roundRect(c, 52, cardY, cardW, cardH, 20); c.fill();
+  c.strokeStyle = INK; c.lineWidth = 2; c.stroke();
+  c.fillStyle = INK; c.font = "800 14px " + F; c.fillText("◎ 最同频 · TOP MATCH", 74, cardY + 34);
+  c.font = "900 38px " + F; c.fillText(r.top.name, 74, cardY + 86);
+  c.font = "400 15px " + F; c.fillText(r.top.channel + "  " + r.top.pct + " 分", 74, cardY + 118);
+  // 右：纸白
+  c.fillStyle = PAPER; roundRect(c, 52 + cardW + 16, cardY, cardW, cardH, 20); c.fill();
+  c.strokeStyle = INK; c.lineWidth = 2; c.stroke();
+  c.fillStyle = "#818876"; c.font = "800 14px " + F; c.fillText("△ 最难对上 · SIGNAL GAP", 74 + cardW + 16, cardY + 34);
+  c.fillStyle = INK; c.font = "900 38px " + F; c.fillText(r.low.name, 74 + cardW + 16, cardY + 86);
+  c.fillStyle = "#3C433A"; c.font = "400 15px " + F; c.fillText(r.low.channel + "  " + r.low.pct + " 分", 74 + cardW + 16, cardY + 118);
+
+  // 友情画像
+  c.fillStyle = PAPER; roundRect(c, 52, 644, W - 104, 200, 20); c.fill();
+  c.strokeStyle = "rgba(23,28,22,.2)"; c.lineWidth = 2; c.stroke();
+  c.fillStyle = INK; c.font = "900 20px " + F; c.fillText("友情画像 / PORTRAIT", 78, 682);
+  c.fillStyle = "#3C433A"; c.font = "400 17px " + F;
+  const portrait = r.top.profile + r.second.asSub;
+  wrapText(c, portrait, 78, 718, W - 156, 30, 4);
+
+  // 八位嘉宾迷你柱状图
+  c.fillStyle = INK; c.font = "900 20px " + F; c.fillText("八位嘉宾 · 友情同频度", 54, 890);
+  c.fillStyle = "#818876"; c.font = "700 13px " + F; c.fillText("FREQUENCY CHART / 相对同频指数", 54, 914);
+  const bx = 58, bw = 62, gap = 20, baseY = 1080, maxH = 118;
+  r.ranked.forEach((x, i) => {
+    const px = bx + i * (bw + gap);
+    const h = Math.max(20, x.pct / 100 * maxH);
+    c.fillStyle = i === 0 ? LIME : "rgba(23,28,22,.72)";
+    roundRect(c, px, baseY - h, bw, h, 7); c.fill();
+    c.strokeStyle = INK; c.lineWidth = i === 0 ? 2 : 0; if (i === 0) c.stroke();
+    c.fillStyle = i === 0 ? INK : "#818876"; c.font = (i === 0 ? "900" : "700") + " 14px " + F;
+    c.textAlign = "center"; c.fillText(String(x.pct), px + bw / 2, baseY - h - 10);
+    c.fillStyle = i === 0 ? INK : "#3C433A"; c.font = (i === 0 ? "900" : "400") + " 15px " + F;
+    c.fillText(x.name, px + bw / 2, baseY + 28);
+    c.textAlign = "left";
+  });
+  c.strokeStyle = "rgba(23,28,22,.25)"; c.lineWidth = 1;
+  c.beginPath(); c.moveTo(52, baseY + 2); c.lineTo(W - 52, baseY + 2); c.stroke();
+
+  // 页脚
+  c.strokeStyle = "rgba(23,28,22,.18)"; c.beginPath(); c.moveTo(54, 1140); c.lineTo(W - 54, 1140); c.stroke();
+  c.fillStyle = INK; c.font = "900 17px " + F; c.fillText("来测测你的友情频道，看看和谁最同频 →", 54, 1176);
+  c.fillStyle = "#818876"; c.font = "400 13px " + F;
+  c.fillText("趣味自我探索 · 非心理测评 · 结果仅供一乐", 54, 1202);
+  c.fillStyle = INK; c.font = "900 13px " + F; c.textAlign = "right";
+  c.fillText("001 / LAB", W - 54, 1202); c.textAlign = "left";
+
+  return cv.toDataURL("image/png");
+}
+
+/* ===== 事件绑定 ===== */
+$("btnStart").addEventListener("click", () => {
+  answers = new Array(QUESTIONS.length).fill(null);
+  current = 0; clearTimeout(autoTimer);
+  renderQuestion(); showView("viewQuiz");
+});
+$("btnPrev").addEventListener("click", () => goTo(current - 1));
+$("btnNext").addEventListener("click", advance);
+$("btnHome").addEventListener("click", () => { clearTimeout(autoTimer); showView("viewHome"); });
+$("btnRetry").addEventListener("click", () => {
+  answers = new Array(QUESTIONS.length).fill(null);
+  current = 0; clearTimeout(autoTimer);
+  renderQuestion(); showView("viewQuiz");
+});
+$("btnShare").addEventListener("click", () => {
+  if (!lastResult) return;
+  $("shareModal").classList.add("open");
+  $("shareImg").style.display = "none";
+  $("shareLoading").style.display = "grid";
+  setTimeout(() => {
+    try {
+      shareDataUrl = buildShareCard(lastResult);
+      $("shareImg").src = shareDataUrl;
+      $("shareImg").style.display = "block";
+      $("shareLoading").style.display = "none";
+    } catch (e) {
+      $("shareLoading").textContent = "卡片生成失败：" + e.message;
+    }
+  }, 60);
+});
+$("btnDownload").addEventListener("click", () => {
+  if (!shareDataUrl) return;
+  const a = document.createElement("a");
+  a.href = shareDataUrl;
+  a.download = "后会友期-友情合拍鉴定卡.png";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+});
+$("btnClose").addEventListener("click", () => $("shareModal").classList.remove("open"));
+$("shareModal").addEventListener("click", e => {
+  if (e.target === $("shareModal")) $("shareModal").classList.remove("open");
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") $("shareModal").classList.remove("open");
+  if ($("viewQuiz").classList.contains("active") && e.key >= "1" && e.key <= "4"){
+    selectOption(Number(e.key) - 1);
+  }
+});
+
+renderChips();
+</script>
+</body>
+</html>
